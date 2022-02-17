@@ -1,20 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import fetchData from "../../utils/fetch";
 
-const Movie = ({ user, movie }) => {
+const Movie = ({ user, movie, create }) => {
   const [title, setTitle] = useState("");
   const [actors, setActors] = useState([]);
   const [synopsis, setSynopsis] = useState("");
   const [createSuccess, setCreateSuccess] = useState("");
 
   let baseURL = "";
-  movie
-    ? (baseURL = `${process.env.REACT_APP_BASE_URL}/movie`)
-    : (baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movie.title}`);
+  let httpVerb = "";
+  if (create === true) {
+    baseURL = `${process.env.REACT_APP_BASE_URL}/movie`;
+    httpVerb = "POST";
+  } else {
+    baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movie.title}`;
+    httpVerb = "PUT";
+  }
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleActorsChange = (e) => setActors(e.target.value);
   const handleSynopsisChange = (e) => setSynopsis(e.target.value);
+
+  useEffect(() => {
+    !create && populateFields();
+  }, []);
+
+  const populateFields = () => {
+    setTitle(movie.title);
+    setActors(movie.actors);
+    setSynopsis(movie.synopsis);
+  };
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -25,18 +40,20 @@ const Movie = ({ user, movie }) => {
       user_id: user.id,
     });
 
-    const data = await fetchData(baseURL, payload, "POST");
+    const data = await fetchData(baseURL, payload, httpVerb);
 
     if (data.error) {
       setCreateSuccess(data.error);
     } else {
-      setCreateSuccess("Movie created successfully");
+      create
+        ? setCreateSuccess("Movie created successfully")
+        : setCreateSuccess("Movie updated successfully");
     }
   };
 
   return (
     <div>
-      {movie ? <h1>Create new movie</h1> : <h1>Update Movie</h1>}
+      {create ? <h1>Create new movie</h1> : <h1>Update Movie</h1>}
       <h3>{createSuccess}</h3>
       <form onSubmit={submitForm}>
         <label htmlFor="title">title:</label>

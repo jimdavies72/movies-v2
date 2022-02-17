@@ -16,8 +16,8 @@ const UpdateProfile = ({ user, setUserHandler }) => {
     });
 
     const data = await fetchData(baseURL, payload, "PUT");
-    if (data.err) {
-      setUpdateSuccess(data.err);
+    if (data.error) {
+      setUpdateSuccess(data.error);
     } else {
       setUpdateSuccess("Profile updated successfully");
       setUserHandler(data);

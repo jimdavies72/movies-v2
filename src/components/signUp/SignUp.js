@@ -23,8 +23,8 @@ const SignUp = ({ setUserHandler }) => {
 
     const data = await fetchData(baseURL, payload, "POST");
 
-    if (data.err) {
-      setSignupSuccess(data.err);
+    if (data.error) {
+      setSignupSuccess(data.error);
     } else {
       setSignupSuccess("User registered successfully");
       setUserHandler(data);

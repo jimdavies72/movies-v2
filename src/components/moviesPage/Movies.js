@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import fetchData from "../../utils/fetch";
 import MovieCard from "../movieCard/MovieCard";
 
-const Movies = () => {
+const Movies = ({ user, setMovieDataHandler }) => {
   const [movieData, setMovieData] = useState([]);
   const baseURL = `${process.env.REACT_APP_BASE_URL}/movie`;
 
@@ -24,9 +24,9 @@ const Movies = () => {
           return (
             <div key={index}>
               <MovieCard
-                title={movie.title}
-                actors={movie.actors}
-                synopsis={movie.synopsis}
+                user={user}
+                movieObject={movie}
+                setMovieDataHandler={setMovieDataHandler}
               />
             </div>
           );

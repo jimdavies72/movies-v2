@@ -20,8 +20,8 @@ const Login = ({ setUserHandler }) => {
 
     const data = await fetchData(baseURL, payload, "POST");
 
-    if (data.err) {
-      setLoginSuccess(data.err);
+    if (data.error) {
+      setLoginSuccess(data.error);
     } else {
       setLoginSuccess("User Logged in Successfully");
       setUserHandler(data);

@@ -20,8 +20,8 @@ const UpdatePassword = ({ user, setUserHandler }) => {
     });
 
     const data = await fetchData(baseURL, payload, "PUT");
-    if (data.err) {
-      setUpdateSuccess(data.err);
+    if (data.error) {
+      setUpdateSuccess(data.error);
     } else {
       setUpdateSuccess("Password Updated Successfully");
       setUserHandler(data);

@@ -19,6 +19,8 @@ import Movie from "./components/movie/Movie";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [movie, setMovie] = useState(null);
+  const [create, setCreate] = useState(false);
 
   const setUserHandler = (data) => {
     setUser({
@@ -27,6 +29,11 @@ const App = () => {
       email: data.user.email,
       password: data.user.password,
     });
+  };
+
+  const setMovieDataHandler = (object, createUpdate) => {
+    setMovie(object);
+    setCreate(createUpdate);
   };
 
   return (
@@ -46,10 +53,10 @@ const App = () => {
           <Profile user={user} setUserHandler={setUserHandler} />
         </Route>
         <Route exact path="/movies/movie">
-          <Movie user={user} movie={true} />
+          <Movie user={user} movie={movie} create={create} />
         </Route>
         <Route exact path="/movies">
-          <Movies user={user} />
+          <Movies user={user} setMovieDataHandler={setMovieDataHandler} />
         </Route>
       </Switch>
     </div>
