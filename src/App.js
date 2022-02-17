@@ -14,6 +14,8 @@ import LandingPage from "./components/landingPage/LandingPage";
 import SignUp from "./components/signUp/SignUp";
 import Login from "./components/login/Login";
 import Profile from "./components/profilePage/Profile";
+import Movies from "./components/moviesPage/Movies";
+import Movie from "./components/movie/Movie";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -42,6 +44,12 @@ const App = () => {
         </Route>
         <Route exact path="/profile">
           <Profile user={user} setUserHandler={setUserHandler} />
+        </Route>
+        <Route exact path="/movies/movie">
+          <Movie user={user} movie={true} />
+        </Route>
+        <Route exact path="/movies">
+          <Movies user={user} />
         </Route>
       </Switch>
     </div>
