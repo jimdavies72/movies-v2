@@ -1,8 +1,10 @@
+import "./landingPage.css";
+
 const LandingPage = () => {
   return (
-    <>
-      <h1>Welcome to Movies REST Site</h1>
-    </>
+    <div>
+      <h2>Welcome to REST Movies</h2>
+    </div>
   );
 };
 export default LandingPage;

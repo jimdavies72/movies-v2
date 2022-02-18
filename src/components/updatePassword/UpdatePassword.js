@@ -30,26 +30,29 @@ const UpdatePassword = ({ user, setUserHandler }) => {
 
   return (
     <div>
-      <h3>Update Password</h3>
-      <h3>{updateSuccess}</h3>
-      <form onSubmit={handlePasswordSubmit}>
-        <label htmlFor="currentPassword">Current password:</label>
-        <input
-          type="password"
-          name="currentPassword"
-          value={currentPassword}
-          onChange={handleCurrentPasswordChange}
-        />
-        <label htmlFor="newPassword">New password:</label>
-        <input
-          type="password"
-          name="newPassword"
-          value={newPassword}
-          onChange={handleNewPasswordChange}
-        />
-
-        <input type="submit" value="Submit" />
+      <form onSubmit={handlePasswordSubmit} className="form">
+        <h3>Update Password</h3>
+        <div className="frm-ctrl">
+          <label htmlFor="currentPassword">Current password:</label>
+          <input
+            type="password"
+            name="currentPassword"
+            value={currentPassword}
+            onChange={handleCurrentPasswordChange}
+          />
+        </div>
+        <div className="frm-ctrl">
+          <label htmlFor="newPassword">New password:</label>
+          <input
+            type="password"
+            name="newPassword"
+            value={newPassword}
+            onChange={handleNewPasswordChange}
+          />
+        </div>
+        <input type="submit" value="Submit" className="sub-btn-pri" />
       </form>
+      <h3>{updateSuccess}</h3>
     </div>
   );
 };

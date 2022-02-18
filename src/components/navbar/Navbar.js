@@ -2,49 +2,46 @@ import "./navbar.css";
 
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ createMovieHandler, myMoviesHandler }) => {
   return (
-    <>
-      <div className="nav-bar">
-        <Link to="/">
-          <h1 className="logo">Movies - REST</h1>
+    <div className="nav-bar">
+      <div className="action-btns">
+        <Link to="/movies">
+          <button
+            onClick={() => myMoviesHandler(false)}
+            className="nav-btn-pri"
+          >
+            Movies
+          </button>
         </Link>
-
-        <div className="nav-links">
-          <Link to="/signup">
-            <span>
-              <i className="fas fa-user-plus"></i>
-            </span>
-          </Link>
-          <Link to="/login">
-            <span>
-              <i className="fas fa-sign-in-alt"></i>
-            </span>
-          </Link>
-          <Link to="/logout">
-            <span>
-              <i className="fas fa-sign-out-alt"></i>
-            </span>
-          </Link>
-
-          <Link to="/">
-            <span>
-              <i className="fas fa-home"></i>
-            </span>
-          </Link>
-          <Link to="/profile">
-            <span>
-              <i className="fas fa-user-circle"></i>
-            </span>
-          </Link>
-          <Link to="/allusers">
-            <span>
-              <i className="fas fa-users"></i>
-            </span>
-          </Link>
-        </div>
+        <Link to="/mymovies">
+          <button onClick={() => myMoviesHandler(true)} className="nav-btn-pri">
+            My Movies
+          </button>
+        </Link>
+        <Link to="/movies/movie">
+          <button
+            onClick={() => createMovieHandler(true)}
+            className="nav-btn-pri"
+          >
+            Create
+          </button>
+        </Link>
+        <Link to="/profile">
+          <button className="nav-btn-pri">Profile</button>
+        </Link>
       </div>
-    </>
+      <div className="login-btns">
+        <Link to="/login">
+          <button className="nav-btn-pri">LOGIN</button>
+        </Link>
+        <Link to="/signup">
+          <span>
+            <button className="nav-btn-sec">SIGN UP </button>
+          </span>
+        </Link>
+      </div>
+    </div>
   );
 };
 

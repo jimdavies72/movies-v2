@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import fetchData from "../../utils/fetch";
 import MovieCard from "../movieCard/MovieCard";
 
-const Movies = ({ user, setMovieDataHandler }) => {
+const Movies = ({ user, myMovies, setMovieDataHandler }) => {
   const [movieData, setMovieData] = useState([]);
-  const baseURL = `${process.env.REACT_APP_BASE_URL}/movie`;
+
+  let baseURL = "";
+  myMovies
+    ? (baseURL = `${process.env.REACT_APP_BASE_URL}/mymovies/${user.id}`)
+    : (baseURL = `${process.env.REACT_APP_BASE_URL}/movie`);
 
   const getMovieData = async () => {
     const payload = null;
@@ -15,7 +19,7 @@ const Movies = ({ user, setMovieDataHandler }) => {
 
   useEffect(() => {
     getMovieData();
-  }, []);
+  }, [movieData]);
 
   return (
     <div>

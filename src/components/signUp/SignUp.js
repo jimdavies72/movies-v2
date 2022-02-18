@@ -1,3 +1,4 @@
+import "./signUp.css";
 import { useState } from "react";
 import fetchData from "../../utils/fetch";
 
@@ -32,36 +33,40 @@ const SignUp = ({ setUserHandler }) => {
   };
 
   return (
-    <>
+    <div className="frm-container">
       <h1>Sign Up User</h1>
-      <h3>{signupSuccess}</h3>
-      <form onSubmit={submitForm}>
-        <label htmlFor="user">User:</label>
-        <input
-          type="text"
-          name="user"
-          value={user}
-          onChange={handleUserChange}
-        />
-        <label htmlFor="email">Email Address:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-
-        <input type="submit" value="Submit" />
+      <form onSubmit={submitForm} className="form">
+        <div className="frm-ctrl">
+          <label htmlFor="user">User:</label>
+          <input
+            type="text"
+            name="user"
+            value={user}
+            onChange={handleUserChange}
+          />
+        </div>
+        <div className="frm-ctrl">
+          <label htmlFor="email">Email Address:</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <div className="frm-ctrl">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <input type="submit" value="Submit" className="sub-btn-pri" />
       </form>
-    </>
+      <h3>{signupSuccess}</h3>
+    </div>
   );
 };
 

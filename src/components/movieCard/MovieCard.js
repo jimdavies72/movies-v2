@@ -1,13 +1,23 @@
+import "./movieCard.css";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import fetchData from "../../utils/fetch";
 
 const MovieCard = ({ user, movieObject, setMovieDataHandler }) => {
-  const baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movieObject.title}`;
+  const baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movieObject._id}`;
+  const [allowControl, SetAllowControl] = useState(false);
+
+  useEffect(() => {
+    if (movieObject.user_id) {
+      if (user.id === movieObject.user_id) {
+        SetAllowControl(true);
+      }
+    }
+  }, []);
 
   const deleteMovie = async () => {
     const payload = null;
     const data = await fetchData(baseURL, payload, "DELETE");
-    window.location.reload();
   };
 
   return (
@@ -17,21 +27,23 @@ const MovieCard = ({ user, movieObject, setMovieDataHandler }) => {
         movieObject.actors.map((actor, index) => {
           return (
             <div key={index}>
-              <h3>{actor}</h3>
+              <h4>{actor}</h4>
             </div>
           );
         })}
       {movieObject.synopsis ? (
-        <h3>Synopsis: {movieObject.synopsis}</h3>
+        <p>Synopsis: {movieObject.synopsis}</p>
       ) : (
-        <h3>Synopsis: n/a</h3>
+        <p>Synopsis: n/a</p>
       )}
-      <Link to="/movies/movie">
-        <button onClick={() => setMovieDataHandler(movieObject, true)}>
-          Update Movie
-        </button>
-      </Link>
-      <button onClick={deleteMovie}>Delete Movie</button>
+      {allowControl && (
+        <Link to="/movies/movie">
+          <button onClick={() => setMovieDataHandler(movieObject, false)}>
+            Update Movie
+          </button>
+        </Link>
+      )}
+      {allowControl && <button onClick={deleteMovie}>Delete Movie</button>}
     </div>
   );
 };

@@ -21,6 +21,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [movie, setMovie] = useState(null);
   const [create, setCreate] = useState(false);
+  const [myMovies, setMyMovies] = useState(false);
 
   const setUserHandler = (data) => {
     setUser({
@@ -36,9 +37,21 @@ const App = () => {
     setCreate(createUpdate);
   };
 
+  const createMovieHandler = (value) => {
+    setCreate(value);
+  };
+
+  const myMoviesHandler = (value) => {
+    setMyMovies(value);
+  };
+
   return (
     <div className="app-container">
-      <Navbar user={user} />
+      <Navbar
+        user={user}
+        createMovieHandler={createMovieHandler}
+        myMoviesHandler={myMoviesHandler}
+      />
       <Switch>
         <Route exact path="/">
           {user ? <HomePage user={user} /> : <LandingPage />}
@@ -56,7 +69,18 @@ const App = () => {
           <Movie user={user} movie={movie} create={create} />
         </Route>
         <Route exact path="/movies">
-          <Movies user={user} setMovieDataHandler={setMovieDataHandler} />
+          <Movies
+            user={user}
+            myMovies={myMovies}
+            setMovieDataHandler={setMovieDataHandler}
+          />
+        </Route>
+        <Route exact path="/mymovies">
+          <Movies
+            user={user}
+            myMovies={myMovies}
+            setMovieDataHandler={setMovieDataHandler}
+          />
         </Route>
       </Switch>
     </div>

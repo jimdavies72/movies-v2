@@ -3,7 +3,7 @@ import UpdatePassword from "../updatePassword/UpdatePassword";
 
 const Profile = ({ user, setUserHandler }) => {
   return (
-    <div>
+    <div className="frm-container">
       <h1>{user.username}'s Profile Page</h1>
       <UpdateProfile user={user} setUserHandler={setUserHandler} />
       <UpdatePassword user={user} setUserHandler={setUserHandler} />

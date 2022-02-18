@@ -13,7 +13,7 @@ const Movie = ({ user, movie, create }) => {
     baseURL = `${process.env.REACT_APP_BASE_URL}/movie`;
     httpVerb = "POST";
   } else {
-    baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movie.title}`;
+    baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movie._id}`;
     httpVerb = "PUT";
   }
 
@@ -52,37 +52,41 @@ const Movie = ({ user, movie, create }) => {
   };
 
   return (
-    <div>
+    <div className="frm-container">
       {create ? <h1>Create new movie</h1> : <h1>Update Movie</h1>}
-      <h3>{createSuccess}</h3>
-      <form onSubmit={submitForm}>
-        <label htmlFor="title">title:</label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleTitleChange}
-        />
-        <label htmlFor="actors">Actors:</label>
-        <input
-          type="text"
-          name="actors"
-          value={actors}
-          onChange={handleActorsChange}
-        />
-
-        <label htmlFor="synopsis">Synopsis:</label>
-        <textarea
-          cols="60"
-          rows="5"
-          type="text"
-          name="synopsis"
-          value={synopsis}
-          onChange={handleSynopsisChange}
-        />
-
-        <input type="submit" value="Submit" />
+      <form onSubmit={submitForm} className="form">
+        <div className="frm-ctrl">
+          <label htmlFor="title">title:</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleTitleChange}
+          />
+        </div>
+        <div className="frm-ctrl">
+          <label htmlFor="actors">Actors:</label>
+          <input
+            type="text"
+            name="actors"
+            value={actors}
+            onChange={handleActorsChange}
+          />
+        </div>
+        <div className="frm-ctrl">
+          <label htmlFor="synopsis">Synopsis:</label>
+          <textarea
+            cols="60"
+            rows="5"
+            type="text"
+            name="synopsis"
+            value={synopsis}
+            onChange={handleSynopsisChange}
+          />
+        </div>
+        <input type="submit" value="Submit" className="sub-btn-pri" />
       </form>
+      <h3>{createSuccess}</h3>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import "./login.css";
 import { useState } from "react";
 import fetchData from "../../utils/fetch";
 
@@ -49,30 +50,31 @@ const Login = ({ setUserHandler }) => {
   };
 
   return (
-    <>
+    <div className="frm-container">
       <h1>Login</h1>
-      <h3>{loginSuccess}</h3>
-
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="user">Username:</label>
-        <input
-          type="text"
-          name="user"
-          value={userName}
-          onChange={handleUserName}
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <input type="submit" value="Submit" />
+      <form onSubmit={handleSubmit} className="form">
+        <div className="frm-ctrl">
+          <label htmlFor="user">Username:</label>
+          <input
+            type="text"
+            name="user"
+            value={userName}
+            onChange={handleUserName}
+          />
+        </div>
+        <div className="frm-ctrl">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </div>
+        <input type="submit" value="Submit" className="sub-btn-pri" />
       </form>
-    </>
+      <h3>{loginSuccess}</h3>
+    </div>
   );
 };
 
