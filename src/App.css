@@ -60,8 +60,8 @@ html {
 
 body {
   font-family: var(--ff-primary);
-  background-color: var(--col-vrylght-grey);
-  overflow: hidden;
+  background-color: var(--col-off-white);
+  overflow: auto;
 }
 
 .frm-container {
@@ -71,11 +71,12 @@ body {
   width: 60%;
   border: var(--col-dar-grey) solid 2px;
   border-radius: 5px;
-  margin: 0 auto;
+  margin: 10px auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-shadow: var(--dark-shadow);
 }
 
 .form {

@@ -8,20 +8,20 @@ const MovieCard = ({ user, movieObject, setMovieDataHandler }) => {
   const [allowControl, SetAllowControl] = useState(false);
 
   useEffect(() => {
-    if (movieObject.user_id) {
-      if (user.id === movieObject.user_id) {
-        SetAllowControl(true);
-      }
+    if (movieObject.user_id === user.id) {
+      SetAllowControl(true);
+    } else {
+      SetAllowControl(false);
     }
-  }, []);
+  }, [movieObject, user.id]);
 
   const deleteMovie = async () => {
     const payload = null;
-    const data = await fetchData(baseURL, payload, "DELETE");
+    fetchData(baseURL, payload, "DELETE");
   };
 
   return (
-    <div>
+    <div className="frm-container">
       <h3>Title: {movieObject.title}</h3>
       {movieObject.actors.length > 0 &&
         movieObject.actors.map((actor, index) => {
@@ -36,14 +36,24 @@ const MovieCard = ({ user, movieObject, setMovieDataHandler }) => {
       ) : (
         <p>Synopsis: n/a</p>
       )}
-      {allowControl && (
-        <Link to="/movies/movie">
-          <button onClick={() => setMovieDataHandler(movieObject, false)}>
-            Update Movie
+      <div className="control-buttons">
+        {allowControl && (
+          <Link to="/movies/movie">
+            {/* movie data handler sets update instead of create */}
+            <button
+              className="nav-btn-pri"
+              onClick={() => setMovieDataHandler(movieObject, false)}
+            >
+              Update Movie
+            </button>
+          </Link>
+        )}
+        {allowControl && (
+          <button className="nav-btn-sec" onClick={deleteMovie}>
+            Delete Movie
           </button>
-        </Link>
-      )}
-      {allowControl && <button onClick={deleteMovie}>Delete Movie</button>}
+        )}
+      </div>
     </div>
   );
 };

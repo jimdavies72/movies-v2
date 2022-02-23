@@ -1,12 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import {
-  Switch,
-  Route,
-  useHistory,
-  withRouter,
-  useLocation,
-} from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
 import HomePage from "./components/homePage/HomePage";
@@ -63,24 +57,43 @@ const App = () => {
           <Login setUserHandler={setUserHandler} />
         </Route>
         <Route exact path="/profile">
-          <Profile user={user} setUserHandler={setUserHandler} />
+          {!user ? (
+            <Redirect to="/login" />
+          ) : (
+            <Profile user={user} setUserHandler={setUserHandler} />
+          )}
         </Route>
         <Route exact path="/movies/movie">
-          <Movie user={user} movie={movie} create={create} />
+          {!user ? (
+            <Redirect to="/login" />
+          ) : (
+            <Movie user={user} movie={movie} create={create} />
+          )}
         </Route>
+
         <Route exact path="/movies">
-          <Movies
-            user={user}
-            myMovies={myMovies}
-            setMovieDataHandler={setMovieDataHandler}
-          />
+          {!user ? (
+            <Redirect to="/login" />
+          ) : (
+            <Movies
+              user={user}
+              // myMovies is boolean
+              myMovies={myMovies}
+              setMovieDataHandler={setMovieDataHandler}
+            />
+          )}
         </Route>
         <Route exact path="/mymovies">
-          <Movies
-            user={user}
-            myMovies={myMovies}
-            setMovieDataHandler={setMovieDataHandler}
-          />
+          {!user ? (
+            <Redirect to="/login" />
+          ) : (
+            <Movies
+              user={user}
+              // myMovies is boolean
+              myMovies={myMovies}
+              setMovieDataHandler={setMovieDataHandler}
+            />
+          )}
         </Route>
       </Switch>
     </div>

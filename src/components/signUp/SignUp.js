@@ -1,4 +1,3 @@
-import "./signUp.css";
 import { useState } from "react";
 import fetchData from "../../utils/fetch";
 
