@@ -23,6 +23,12 @@ const Movies = ({ user, myMovies, setMovieDataHandler }) => {
     getMovieData();
   }, [myMovies]);
 
+  const removeMovieHandler = (movieId) => {
+    let temp = [...movieData];
+    temp = temp.filter((obj) => obj._id !== movieId);
+    setMovieData([...temp]);
+  };
+
   return (
     <div>
       <div className="movies-header">
@@ -36,6 +42,7 @@ const Movies = ({ user, myMovies, setMovieDataHandler }) => {
                 user={user}
                 movieObject={movie}
                 setMovieDataHandler={setMovieDataHandler}
+                removeMovieHandler={removeMovieHandler}
               />
             </div>
           );

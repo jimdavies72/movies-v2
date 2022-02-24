@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import fetchData from "../../utils/fetch";
 
-const MovieCard = ({ user, movieObject, setMovieDataHandler }) => {
+const MovieCard = ({
+  user,
+  movieObject,
+  removeMovieHandler,
+  setMovieDataHandler,
+}) => {
   const baseURL = `${process.env.REACT_APP_BASE_URL}/movie/${movieObject._id}`;
   const [allowControl, SetAllowControl] = useState(false);
 
@@ -18,6 +23,7 @@ const MovieCard = ({ user, movieObject, setMovieDataHandler }) => {
   const deleteMovie = async () => {
     const payload = null;
     fetchData(baseURL, payload, "DELETE");
+    removeMovieHandler(movieObject._id);
   };
 
   return (
