@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import fetchData from "../../utils/fetch";
+import { ListItem } from "../listItems/listItems";
 
 const Movie = ({ user, movie, create }) => {
   const [title, setTitle] = useState("");
   const [actors, setActors] = useState([]);
   const [synopsis, setSynopsis] = useState("");
   const [createSuccess, setCreateSuccess] = useState("");
+
+  useEffect(() => {
+    !create && populateFields();
+  }, []);
 
   let baseURL = "";
   let httpVerb = "";
@@ -18,12 +23,11 @@ const Movie = ({ user, movie, create }) => {
   }
 
   const handleTitleChange = (e) => setTitle(e.target.value);
-  const handleActorsChange = (e) => setActors(e.target.value);
   const handleSynopsisChange = (e) => setSynopsis(e.target.value);
 
-  useEffect(() => {
-    !create && populateFields();
-  }, []);
+  const actorsHandler = (array) => {
+    setActors(array);
+  };
 
   const populateFields = () => {
     setTitle(movie.title);
@@ -65,13 +69,7 @@ const Movie = ({ user, movie, create }) => {
           />
         </div>
         <div className="frm-ctrl">
-          <label htmlFor="actors">Actors:</label>
-          <input
-            type="text"
-            name="actors"
-            value={actors}
-            onChange={handleActorsChange}
-          />
+          <ListItem list={actors} listHandler={actorsHandler} />
         </div>
         <div className="frm-ctrl">
           <label htmlFor="synopsis">Synopsis:</label>
